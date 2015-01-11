@@ -45,11 +45,7 @@ for ($x = 11; $x < 100; $x++) {
 		$num=$newBoard[$x];
 		$row=substr($x,0,1);
 		$col=substr($x,1,1);
-		//$row=2;
-		//$col=3;
-		//echo 'r' .$r. 'c'.$c;
-		//$boardHelper=markOffCell($r,$c,$newBoard[$x],$boardHelper);
-		$rc=($row*10)+$col; 
+		$rc=rcToNum($row,$col); 
 		$boardHelper[$rc][$num]=1; /* clear row of the number*/
 		/* clear the rest of the rc cells*/
 		for($currentX=1; $currentX<10; $currentX++){
@@ -60,17 +56,17 @@ for ($x = 11; $x < 100; $x++) {
 		/* clear row of the number*/
 		for($rowX=1; $rowX<10; $rowX++){
 			if($rowX!=$col){
-				if($boardHelper[($row*10)+$rowX][$num]!=1){
-					$boardHelper[($row*10)+$rowX][$num]= -1;
+				if($boardHelper[rcToNum($row,$rowX)][$num]!=1){
+					$boardHelper[rcToNum($row,$rowX)][$num]= -1;
 					//echo"clear row of [".$num."] row:".$row." col:".$col." array:".(($row*10)+$rowX)."<br/>\n";
 				}
 			}
 		}
 		// clear column of the number 
 		for($colX=0; $colX<10; $colX++){ 
-			if((((($colX)*10)+$col)!==$rc)&&(((($colX)*10)+$col)>10)){
-				if($boardHelper[((($colX)*10)+$col)][$num]!=1){
-					$boardHelper[((($colX)*10)+$col)][$num]=-1;
+			if((rcToNum($colX,$col)!==$rc)&&(rcToNum($colX,$col)>10)){
+				if($boardHelper[rcToNum($colX,$col)][$num]!=1){
+					$boardHelper[rcToNum($colX,$col)][$num]=-1;
 				//echo"clear col of [".$num."] row:".$row." col:".$col." colX".$colX." array:".((($colX)*10)+$col)."<br/>\n";
 				}
 				//echo"row ".$row." colX ".$colX;
@@ -103,9 +99,9 @@ for ($x = 11; $x < 100; $x++) {
 		{
 			for($spotC=0; $spotC<3; $spotC++)
 			{
-				if((((($row-$topR)+$spotR)*10)+(($col-$topC)+$spotC))!==$rc){
-				if($boardHelper[(((($row-$topR)+$spotR)*10)+(($col-$topC)+$spotC))][$num]!==-1){
-					$boardHelper[(((($row-$topR)+$spotR)*10)+(($col-$topC)+$spotC))][$num]=-1;
+				if((rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC)))!==$rc){
+				if($boardHelper[rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC))][$num]!==-1){
+					$boardHelper[rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC))][$num]=-1;
 				//	echo"clear box of [".$num."] row:".$row." col:".$col." topR:".$topR." topC:".$topC." spotR".$spotR." spotC".$spotC." array:".(((($row-$topR)+$spotR)*10)+(($col-$topC)+$spotC))."<br/>\n";
 				}
 			}
@@ -199,12 +195,12 @@ echo '<tr>';
     for($a=0; $a<3; $a++){
        for($b=0; $b<3; $b++){
        if(b==1){
-          echo' <td width="25">'.((($tr+$a)*10)+($tc+$b)).'</td>';
+          echo' <td width="25">'.rcToNum(($tr+$a),($tc+$b)).'</td>';
           }else{
-          echo'</tr><tr> <td width="25">'.((($tr+$a)*10)+($tc+$b)).'</td>';
+          echo'</tr><tr> <td width="25">'.rcToNum(($tr+$a),($tc+$b)).'</td>';
           }
 				    for($v=1; $v<10; $v++){
-						if( $boardHelper[((($tr+$a)*10)+($tc+$b))][$v] ==1){
+						if( $boardHelper[rcToNum(($tr+$a),($tc+$b))][$v] ==1){
 						echo '<td width="25">@</td>';
 						}else if($boardHelper[((($tr+$a)*10)+($tc+$b))][$v]== (-1)){
 							echo '<td width="25">X</td>';
