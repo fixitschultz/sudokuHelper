@@ -216,8 +216,7 @@ echo '<tr>';
           }else{
           echo'</tr><tr> <td width="25">'.((($tr+$a)*10)+($tc+$b)).'</td>';
           }
-				    for($v=0; $v<10; $v++){
-				     echo '<td width="25“>'.$v.'</td>';
+				    
 				 /*
 				    if( $boardHelper[((($tr+$a)*10)+($tc+$b))][$v] ==1){
 				    echo '@'.$v.'</td>';
@@ -227,8 +226,11 @@ echo '<tr>';
 						   echo ' '.$v.'</td>';
 			    	}
 			    	*/
-			   	}
+			   	
 			   	}
 		 	}
+			for($v=0; $v<10; $v++){
+				     echo '<td width="25“>'.$v.'</td>';
+			}
 }
 ?>
