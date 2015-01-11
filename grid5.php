@@ -32,14 +32,10 @@ for ($x = 0; $x < 81; $x++) {
     }
 }
 echo '</table>';
-echo '<table border="1" cellpading="1">';
-echo '<tr>';
 $boardHelper[0][0]=0;
 for ($x = 11; $x < 100; $x++) {
 	if($x%10==0){
 		$x++;
-	echo '</tr>';
-	echo '<tr>';
 	}
 	if(($newBoard[$x]>0)&&($newBoard[$x]<10)){
 		$num=$newBoard[$x];
@@ -58,7 +54,6 @@ for ($x = 11; $x < 100; $x++) {
 			if($rowX!=$col){
 				if($boardHelper[rcToNum($row,$rowX)][$num]!=1){
 					$boardHelper[rcToNum($row,$rowX)][$num]= -1;
-					//echo"clear row of [".$num."] row:".$row." col:".$col." array:".(($row*10)+$rowX)."<br/>\n";
 				}
 			}
 		}
@@ -67,7 +62,6 @@ for ($x = 11; $x < 100; $x++) {
 			if((rcToNum($colX,$col)!==$rc)&&(rcToNum($colX,$col)>10)){
 				if($boardHelper[rcToNum($colX,$col)][$num]!=1){
 					$boardHelper[rcToNum($colX,$col)][$num]=-1;
-				//echo"clear col of [".$num."] row:".$row." col:".$col." colX".$colX." array:".((($colX)*10)+$col)."<br/>\n";
 				}
 				//echo"row ".$row." colX ".$colX;
 			}
@@ -102,49 +96,62 @@ for ($x = 11; $x < 100; $x++) {
 				if((rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC)))!==$rc){
 				if($boardHelper[rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC))][$num]!==-1){
 					$boardHelper[rcToNum((($row-$topR)+$spotR),(($col-$topC)+$spotC))][$num]=-1;
-				//	echo"clear box of [".$num."] row:".$row." col:".$col." topR:".$topR." topC:".$topC." spotR".$spotR." spotC".$spotC." array:".(((($row-$topR)+$spotR)*10)+(($col-$topC)+$spotC))."<br/>\n";
 				}
 			}
 			}
 		}
 	}
-		//echo '<td>'.$newBoard[$x].'</td>';
 }
-echo '</table>';
-echo '<table align="center" border="1" cellpading="3">';
-echo ' <tr> <td width="25"></td><td width="25">1</td><td width="25">2</td><td width="25">3</td><td width="25">4</td><td width="25">5</td><td width="25">6</td><td width="25">7</td><td width="25">8</td><td width="25">9</td></tr>';
-echo '<tr>';
-$m = 1;
-$color=0;
-for ($r = 11; $r < 100; $r++) { //81 rows
-	if($r%10==0){
-		$r++;
-		if($color==1)
-		{
-			$color=0;
-		}else{
-			$color=1;
-		}
-	}
-	echo '</tr>';
+
+for($count=1; $count<10; $count++){
+	echo "<br/>\n<br/>\n<br/>\n";
+	echo '<table align="center" border="1" cellpading="3">';
+	echo ' <tr> <td width="45">Row '.($count).'</td><td width="25">1</td><td width="25">2</td><td width="25">3</td><td width="25">4</td><td width="25">5</td><td width="25">6</td><td width="25">7</td><td width="25">8</td><td width="25">9</td></tr>';
 	echo '<tr>';
-	echo '<td width="25">'.$r.'</td>';
-	for($c = 1; $c < 10; $c++){
-		if($color==1){
-			echo'<td bgcolor="lightgrey" width="25">';
-		}else{
-			echo'<td bgcolor="white" width="25">';
+	for($a=1; $a<10; $a++){
+		if($a!=1){
+			echo'</tr><tr>';
 		}
-				if($boardHelper[$r][$c]==1){
-				echo '@</td>';
-				}else if($boardHelper[$r][$c]== (-1)){
-					echo 'X</td>';
-				}else{
-						echo ' </td>';
-				}
+		echo' <td width="25">'.rcToNum(($count),($a)).'</td>';
+		for($v=1; $v<10; $v++){
+			if( $boardHelper[rcToNum(($count),($a))][$v] ==1){
+			echo '<td width="25">@</td>';
+			}else if($boardHelper[rcToNum(($count),($a))][$v]== (-1)){
+				echo '<td width="25">X</td>';
+			 }else{
+				   echo '<td width="25"> </td>';
+			}
+		}
 	}
-}	
-echo '</table>';
+				echo '</table>';
+}
+for($count=1; $count<10; $count++){
+	echo "<br/>\n<br/>\n<br/>\n";
+	echo '<table align="center" border="1" cellpading="3">';
+	echo ' <tr> <td width="65">Column '.($count).'</td><td width="25">1</td><td width="25">2</td><td width="25">3</td><td width="25">4</td><td width="25">5</td><td width="25">6</td><td width="25">7</td><td width="25">8</td><td width="25">9</td></tr>';
+	echo '<tr>';
+	for($a=1; $a<10; $a++){
+		if($a!=1){
+		echo'</tr><tr>';
+		}
+		echo' <td width="25">'.rcToNum($a,$count).'</td>';
+		for($v=1; $v<10; $v++){
+				switch( $boardHelper[rcToNum($a,$count)][$v])
+				{
+					case (-1):
+						echo '<td width="25">X</td>';
+						break;
+					case 1:
+						echo '<td width="25">@</td>';
+						break;
+					default :
+						echo '<td width="25"> </td>';
+				}
+			}
+	}
+				echo '</table>';
+}
+
 for($count=0; $count<9; $count++){
 switch($count)
 {
@@ -190,7 +197,7 @@ switch($count)
 }
 echo "<br/>\n<br/>\n<br/>\n";
 echo '<table align="center" border="1" cellpading="3">';
-echo ' <tr> <td width="25">box '.($count+1).'</td><td width="25">1</td><td width="25">2</td><td width="25">3</td><td width="25">4</td><td width="25">5</td><td width="25">6</td><td width="25">7</td><td width="25">8</td><td width="25">9</td></tr>';
+echo ' <tr> <td width="45">box '.($count+1).'</td><td width="25">1</td><td width="25">2</td><td width="25">3</td><td width="25">4</td><td width="25">5</td><td width="25">6</td><td width="25">7</td><td width="25">8</td><td width="25">9</td></tr>';
 echo '<tr>';
     for($a=0; $a<3; $a++){
        for($b=0; $b<3; $b++){
@@ -199,17 +206,21 @@ echo '<tr>';
           }else{
           echo'</tr><tr> <td width="25">'.rcToNum(($tr+$a),($tc+$b)).'</td>';
           }
-				    for($v=1; $v<10; $v++){
-						if( $boardHelper[rcToNum(($tr+$a),($tc+$b))][$v] ==1){
-						echo '<td width="25">@</td>';
-						}else if($boardHelper[((($tr+$a)*10)+($tc+$b))][$v]== (-1)){
-							echo '<td width="25">X</td>';
-						 }else{
-							   echo '<td width="25"> </td>';
-						}
-					}
-			   	}
-		 	}
+		for($v=1; $v<10; $v++){
+			switch( $boardHelper[rcToNum(($tr+$a),($tc+$b))][$v])
+			{
+				case (-1):
+				echo '<td width="25">X</td>';
+				break;
+				case 1:
+				echo '<td width="25">@</td>';
+				break;
+				default :
+				echo '<td width="25"> </td>';
+			}
+		}
+		}
+	}
 			echo '</table>';
 }
 ?>
