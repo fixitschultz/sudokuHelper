@@ -1,0 +1,57 @@
+With this being a side project of mine, I am well pleased with the progress that I have made on it.  I have had some fun with this project as you will see and time of learning as well.  For example in my early grid part you will see that if you look at grid2 or 3 you will see that there is some pink which is some inspiration from my girlfriend.  She thought I should add some color to the page from it being just all black and white, so I added pink cells when you put a number in the cell.  So she made smiley faces with the grid.
+
+ 
+
+So what I have completed and not completed for what I said I would do in this phase.
+
+Phase 1
+
+{no}read and save the puzzle to the file server.
+See if the puzzle is solved or incomplete.
+{excel} check rows 1-9
+{excel} check columns 1-9
+{excel} check boxes 1-9
+{???} check big rows 1-3 ( may not be need)
+{???} check big columns 1-3 ( may not be need)
+{no} See if any part of the puzzle can be solved by using one-choice.
+check row 1-9
+check columns 1-9
+check boxes 1-9
+{no} Have a verbose output of how the program solved the puzzle. For an example
+ A 9 can go into cell 11 [One Choice method]
+A 1,2,3,4, or 5 can not go into cell 34 {????]
+So you can see I did not do well but that might because I did things that I did not say that I would do.  I ended up making a sudoku solver in excel, while I was working on this project.  I also work more on the backbone tables and code that will probably will not get seen for most of the project but will be a great debugging help for me.  I took a lot of inspiration from false logic puzzle that will help me make the one choice method easy to solve.  My plan tonight is to see how far I can solve a puzzle by just using my false logic grids and not look at the sudoku puzzle at all.  A lot of my time on this phase was getting to know PHP and HTML code again.  I went back and forth on how to use arrays and in the process did create a function to take out some math confusion.  More to explain on that later in this post.  I have been using ManicTime to record my time on this project so you will see some tables and charts in this post on how I spent my time.  On time that is not related to this post I will classify as non project work.  This post has taken a couple days to write because one night I have collected the data, one night to analyze the data and one night to proof read my blog post before I post it.  My goals for the next phase is this.
+
+Have fun coding.
+learn more about html layout
+Complete the one choice solver.
+Show possible  candidates in a 27 by 27 table.
+While this is a short list I think it will be better for me to shorten my phase time so that is why my list is short.
+
+ 
+
+Why am I focusing on the GUI part on this next phase is because why I am learning it is easier to explain to my friends what I am doing if I have something to show and code is just not impressive to my non coding friends.
+
+ 
+
+Some tools that I have start using are as follows
+
+Dropbox file storage
+github for version control
+manicTime time information
+Microsoft Excel to visualize my ideas.
+Notepad++  This is where I have been typing my code.
+Filezilla for FTP to my website.
+Turbo client FTP on my android phone
+ES file explorer for editing files on my android phone.
+Chrome(windows) and Dophin(android) for web browsers.
+So I thought I would be doing a few little things in excel to help with my Sudoku project.  Well that did not happen.  I ended up creating a Sudoku checker in Excel.  I also used the transpose feature in excel and sorting  each 81 columns and the transpose it back to figure 6.
+
+Excel files
+grid1.php
+grid2.php
+grid3.php
+index.html
+grid5.php
+github project 
+
