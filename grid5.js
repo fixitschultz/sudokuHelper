@@ -60,7 +60,9 @@ function gridPrintout(){
 		boardHelper[ih] = new Array(10);
 	 }
 	 for( var mr=0; mr < 100; mr++){
-		boardHelper[mr][0]=0;
+		 for( var ree=0; ree<10; ree++){
+			boardHelper[mr][ree]=0;
+		 }
 	 }
 	var rc=0;
 	var col=0;
@@ -307,4 +309,25 @@ function gridPrintout(){
 		}
 				document.getElementById("box"+(count3+1)).innerHTML=grid;
 	}
+	printOutDoubleArray(boardHelper);
 	}
+	function printOutDoubleArray( doubleArray)
+	{
+		var print = " ";
+		var oneChoice = " ";
+		for(var a=0; a < doubleArray.length; a++){
+			for(var b=0; b < doubleArray[a].length; b++){
+				print += "["+a+"]["+b+"]="+doubleArray[a][b]+"<br>";
+				if(doubleArray[a][b]===8)
+				{
+					for(var index=1; index < doubleArray[a].length; index++){
+						if(doubleArray[a][index]===0)
+						oneChoice += "["+a+"] is a "+index+"<br>";
+					}
+				}
+			}
+		}
+		document.getElementById("listArray").innerHTML=print;
+		document.getElementById("one").innerHTML=oneChoice;
+	}
+
