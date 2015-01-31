@@ -323,6 +323,7 @@ function gridPrintout(){
 					for(var index=1; index < doubleArray[a].length; index++){
 						if(doubleArray[a][index]===0)
 						oneChoice += "["+a+"] is a "+index+"<br>";
+						document.getElementById("b"+a+"").value=index;
 					}
 				}
 			}
