@@ -27,9 +27,33 @@ input {
 
 <body>
 <p id="mone" > </p>
-<script src="grid5.js" type="text/javascript">
-</script>
+<?php
+require "sudoku.php";
+?>
+<script>
+function grabBoard(){
+var board= new Array(100);
+var targeturl;
+var spot=0;
+for(var x=11; x<100; x++){
+var id="b";
 
+	if( x%10==0){
+		x++;
+	}
+	id+=x;
+	boardValue=document.getElementById(id).value;
+
+	if(boardValue === ""){
+	board[spot++]=0;
+	}else{
+	board[spot++]=boardValue;
+	}
+}
+console.log( "board:"+board[11]+" ");
+return board;
+}
+ </script>
  
  <table>
   <colgroup><col><col><col>
@@ -49,7 +73,7 @@ input {
    <tr><td><input type="text" id="b91" name="b91"><td><input type="text" id="b92" name="b92"><td><input type="text" id="b93" name="b93"><td><input type="text" id="b94" name="b94"><td><input type="text" id="b95" name="b95"><td><input type="text" id="b96" name="b96"><td><input type="text" id="b97" name="b97"><td><input type="text" id="b98" name="b98"><td><input type="text" id="b99" name="b99">
  </table>
 
-<form  name="search" onclick="gridPrintout()" >
+<form  name="search" onclick="grabBoard()" >
  <input type="button" name="Submit" value="Submit" style="width: 9.4em; border: solid thin"/>
 
 </form>

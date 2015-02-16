@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style type="text/css">
+table { 
+border-collapse: collapse;
+border: solid thick; 
+}
+table.gri {
+border-collapse: collapse;
+border: none; 
+}
+td.solved{
+background-style: pink;
+}
+td.ee {
+border-collapse: collapse;
+border: none; 
+}
+colgroup, tbody {
+ border: solid thin; 
+ border-width:3px;
+ }
+td { 
+border: solid thin;
+ height: 1.4em;
+ width: 1.4em; 
+ text-align: center;
+ padding: 0; }
+input {
+    width: 1.4em;
+	border: none;
+}
+td.grid {
+	border: none;
+}
+
+
+</style>
+
+</html>
+</head>
+
+<body>
+<script src="grid5.js" type="text/javascript"></script>
+<script src="arrayHelper.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>
+<script src="nakedPT.js" type="text/javascript"></script>
+<script src="note.js" type="text/javascript"></script>
+
+ <table>
+  
+  <tbody>
+	<colgroup><col>
+    <colgroup><col><col><col>
+  <colgroup><col><col><col>
+  <colgroup><col><col><col>
+  <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+   <tr><td class="ee">1</td><td><input type="text" id="b11" name="b11"></td><td><input type="text" id="b12" name="b12"></td><td><input type="text" id="b13" name="b13"></td><td><input type="text" id="b14" name="b14"></td><td><input type="text" id="b15" name="b15"></td><td><input type="text" id="b16" name="b16"></td><td><input type="text" id="b17" name="b17"></td><td><input type="text" id="b18" name="b18"></td><td><input type="text" id="b19" name="b19"></td>
+   <tr><td class="ee">2</td><td><input type="text" id="b21" name="b21"><td><input type="text" id="b22" name="b22"><td><input type="text" id="b23" name="b23"><td><input type="text" id="b24" name="b24"><td><input type="text" id="b25" name="b25"><td><input type="text" id="b26" name="b26"><td><input type="text" id="b27" name="b27"><td><input type="text" id="b28" name="b28"><td><input type="text" id="b29" name="b29">
+   <tr><td class="ee">3</td><td><input type="text" id="b31" name="b31"><td><input type="text" id="b32" name="b32"><td><input type="text" id="b33" name="b33"><td><input type="text" id="b34" name="b34"><td><input type="text" id="b35" name="b35"><td><input type="text" id="b36" name="b36"><td><input type="text" id="b37" name="b37"><td><input type="text" id="b38" name="b38"><td><input type="text" id="b39" name="b39">
+   <tbody>
+   <tr><td class="ee">4</td><td><input type="text" id="b41" name="b41"><td><input type="text" id="b42" name="b42"><td><input type="text" id="b43" name="b43"><td><input type="text" id="b44" name="b44"><td><input type="text" id="b45" name="b45"><td><input type="text" id="b46" name="b46"><td><input type="text" id="b47" name="b47"><td><input type="text" id="b48" name="b48"><td><input type="text" id="b49" name="b49">
+   <tr><td class="ee">5</td><td><input type="text" id="b51" name="b51"><td><input type="text" id="b52" name="b52"><td><input type="text" id="b53" name="b53"><td><input type="text" id="b54" name="b54"><td><input type="text" id="b55" name="b55"><td><input type="text" id="b56" name="b56"><td><input type="text" id="b57" name="b57"><td><input type="text" id="b58" name="b58"><td><input type="text" id="b59" name="b59">
+   <tr><td class="ee">6</td><td><input type="text" id="b61" name="b61"><td><input type="text" id="b62" name="b62"><td><input type="text" id="b63" name="b63"><td><input type="text" id="b64" name="b64"><td><input type="text" id="b65" name="b65"><td><input type="text" id="b66" name="b66"><td><input type="text" id="b67" name="b67"><td><input type="text" id="b68" name="b68"><td><input type="text" id="b69" name="b69">
+   <tbody>
+   <tr><td class="ee">7</td><td><input type="text" id="b71" name="b71"><td><input type="text" id="b72" name="b72"><td><input type="text" id="b73" name="b73"><td><input type="text" id="b74" name="b74"><td><input type="text" id="b75" name="b75"><td><input type="text" id="b76" name="b76"><td><input type="text" id="b77" name="b77"><td><input type="text" id="b78" name="b78"><td><input type="text" id="b79" name="b79">
+   <tr><td class="ee">8</td><td><input type="text" id="b81" name="b81"><td><input type="text" id="b82" name="b82"><td><input type="text" id="b83" name="b83"><td><input type="text" id="b84" name="b84"><td><input type="text" id="b85" name="b85"><td><input type="text" id="b86" name="b86"><td><input type="text" id="b87" name="b87"><td><input type="text" id="b88" name="b88"><td><input type="text" id="b89" name="b89">
+   <tr><td class="ee">9</td><td><input type="text" id="b91" name="b91"><td><input type="text" id="b92" name="b92"><td><input type="text" id="b93" name="b93"><td><input type="text" id="b94" name="b94"><td><input type="text" id="b95" name="b95"><td><input type="text" id="b96" name="b96"><td><input type="text" id="b97" name="b97"><td><input type="text" id="b98" name="b98"><td><input type="text" id="b99" name="b99">
+ </table>
+
+<form  name="search" onclick="main()" >
+ <input type="button" name="Submit" value="Submit" style="width: 9.4em; border: solid thin"/>
+</form>
+<p id="info"> </p>
+<p id="test"> </p>
+<p>Naked P/T possibility</p>
+<p id="naked"> </p>
+
+<table id="note" align="center" border="0" cellpading="3"  >
+<colgroup><col><col><col><col><col><col><col><col><col>
+  <colgroup><col><col><col><col><col><col><col><col><col>
+  <colgroup><col><col><col><col><col><col><col><col><col>
+</table>
+
+<p id="eight"> </p>
+
+<table class="gri" align="center" border="0" cellpading="3" width="50px" height="450px">
+<tr><td>
+<table class="gri" id="gridBox11" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox12" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox13" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox14" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox15" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox16" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox17" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox18" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table class="gri" id="gridBox19" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td>
+<table id="gridBox21" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox22" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox23" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox24" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox25" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox26" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox27" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox28" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox29" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox31" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox32" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox33" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox34" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox35" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox36" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox37" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox38" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox39" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox41" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox42" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox43" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox44" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox45" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox46" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox47" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox48" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox49" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox51" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox52" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox53" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox54" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox55" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox56" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox57" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox58" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox59" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox61" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox62" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox63" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox64" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox65" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox66" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox67" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox68" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox69" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox71" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox72" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox73" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox74" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox75" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox76" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox77" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox78" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox79" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox81" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox82" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox83" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox84" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox85" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox86" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox87" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox88" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox89" align="center" border="0" cellpading="3" >
+</table></td></tr>
+<tr><td><table id="gridBox91" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox92" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox93" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox94" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox95" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox96" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox97" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox98" align="center" border="0" cellpading="3" >
+</table></td>
+<td><table id="gridBox99" align="center" border="0" cellpading="3" >
+</table></td></tr>
+</table>
+<table id="newBox1" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox2" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox3" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox4" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox5" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox6" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox7" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox8" align="center" border="0" cellpading="3"  >
+</table>
+<table id="newBox9" align="center" border="0" cellpading="3"  >
+</table>
+
+
+
+
+</body>
+</html>
