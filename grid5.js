@@ -1,4 +1,4 @@
-var debugToken=true;
+var debugToken=false;
 var loadC=0;
 function loadBoard(inputBoard)
 {
