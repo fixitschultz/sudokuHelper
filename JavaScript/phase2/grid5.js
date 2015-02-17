@@ -568,9 +568,9 @@ function findEight(array,boardHelper)
 	var print = "";
 	for(var row=0; row<array.length; row++){
 		var rowArray = array[row];
-		for(var col=0; col<rowArray.length; col++){
+		for(var col=1; col<rowArray.length; col++){
 			if(rowArray[col]===8){
-				print +="["+row+"]["+col+"] has a 8 in its cell. "
+				print +="["+row+"]["+col+"] has a 8 in its cell. ";
 				if(row<10){
 					print +="row "+row+" col "+col+" ";
 					print +=findOneChoiceRow(row, col, boardHelper);

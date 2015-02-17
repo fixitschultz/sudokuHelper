@@ -1,0 +1,12 @@
+box 1 unit 3
+box 3 unit 3
+box 3 unit 7
+box 3 unit 8
+box 4 unit 2
+box 4 unit 3
+box 4 unit 7
+box 6 unit 4
+box 7 unit 7
+box 9 unit 2 has a possible
+box 9 unit 3 has a possible
+box 9 unit 4 has a possible 
