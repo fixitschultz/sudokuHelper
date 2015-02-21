@@ -1,6 +1,8 @@
 var loadC=0;
 var boardHelper;
 var colHelper;
+var debugToken=true;
+var loadC=0;
 function main(){
 	if(loadC===0){
 		//loadBoard("000090000000603000009724300075000890801000405034000610003279500000306000000080000");
@@ -9,8 +11,8 @@ function main(){
 		//loadBoard("000012500320900000001007030002030076906000205170050900050600800000005069009140000");//puzzle 97
 		//loadBoard("100007090030020008009600500005300900010080002600004000300000010041000007007000300");//escargot
 		//loadBoard("309000400200709000087000000750060230600904008028050041000000590000106007006000104");//tough 46/81
-		//loadBoard("400010000000309040070005009000060021004070600190050000900400070030608000000030006");//moderate 52/81
-		loadBoard("409716000610389040070245169000964021004173690196852030960421070030698000040537906");//moderate 52/81
+		//loadBoard("400010000000309040070005009000060021004070600190050000900400070030608000000030006");//moderate 52/81 //68 3 is not getting counted.
+		//loadBoard("409716000610389040070245169000964021004173690196852030960421070030698000040537906");//moderate 52/81
 		//loadBoard("120000000000000000000000000000000000000000000000000000000000000000000000000000000");//just two numbers
 		boardHelper = new Array(100);
 	  for (var ih = 0; ih < 100; ih++) {
@@ -36,9 +38,9 @@ function main(){
 	boardHelper[0][0]=0;
 	gridPrintout();
 	tablePrint();
+	
 }
-var debugToken=true;
-var loadC=0;
+
 function loadBoard(inputBoard)
 {
 	//console.log("inputBoard: "+inputBoard);
@@ -97,7 +99,11 @@ boardHelper[rcToNum(row,col)][0]=9;
 boardHelper[0][candidate]+=1;
 boardHelper[(row)*10][candidate]=9;
 boardHelper[0][0]+=1;
-return clearUnitCell(row, col, candidate);
+document.getElementById("b"+rcToNum(row,col)+"").value=candidate;
+clearUnitCell(row, col, candidate);
+clearRow(row, col, candidate);
+clearColumn(row, col, candidate);
+clearBox(row, col, candidate);
 }
 function clearUnitCell(row, col, candidate){
 	var clearCount=0;
@@ -112,7 +118,12 @@ for(var currentX=1; currentX<10; currentX++){
 			}
 	return clearCount;
 }
-
+function rcToCol(num){
+	 return num%10;
+}
+function rcToRow(num){
+			return ((num-(num%10))/10);
+}
 function removeUnitCell(row, col, candidate){
 	var clearCount=0;
 	if(boardHelper[rcToNum(row,col)][candidate]===0){
@@ -120,6 +131,9 @@ function removeUnitCell(row, col, candidate){
 		clearCount++;
 		if(boardHelper[(row*10)][candidate]<=7){
 			boardHelper[(row*10)][candidate]+=1;
+		}
+    if(boardHelper[rcToNum(row, col) ][0]<=7){
+			boardHelper[ rcToNum(row, col) ][0] +=1;
 		}
 	}
 			
@@ -130,14 +144,8 @@ function clearRow(row, col, num){
 	var clearCount=0;
 // clear row of the number
 			for(var rowX=1; rowX<10; rowX++){
-				if(rowX!=col){
-					if(boardHelper[rcToNum(row,rowX)][num]===0){
-						boardHelper[rcToNum(row,rowX)][num]= (-1);
-						clearCount++;
-						if(boardHelper[rcToNum(row,rowX)][0]<=7){
-						boardHelper[rcToNum(row,rowX)][0]+=1;
-						}
-					}
+				if(rowX!==col){
+					removeUnitCell(row,rowX,num);
 				}
 			}
 	return clearCount;
@@ -145,15 +153,9 @@ function clearRow(row, col, num){
 function clearColumn(row, col, num){
 	var clearCount=0;
 	// clear column of the number 
-			for(var colX=0; colX<10; colX++){ 
-				if((rcToNum(colX,col)!==rcToNum(row, col))&&(rcToNum(colX,col)>10)){
-					if(boardHelper[rcToNum(colX,col)][num]===0){
-						boardHelper[rcToNum(colX,col)][num]= (-1);
-						clearCount++;
-						if(boardHelper[rcToNum(colX,col)][0]<=7){
-							boardHelper[rcToNum(colX,col)][0]+=1;
-						}
-					}
+			for(var colX=1; colX<10; colX++){ 
+				if(colX!==row){
+					removeUnitCell(colX,col,num);
 				}
 			}
 	return clearCount;
@@ -196,14 +198,8 @@ function clearBox(row, col, num){
 				for(var spotC=0; spotC<3; spotC++)
 				{
 					if((rcToNum(((row-topR)+spotR),((col-topC)+spotC)))!==rcToNum(row,col)){
-					if(boardHelper[rcToNum(((row-topR)+spotR),((col-topC)+spotC))][num]===0){
-						boardHelper[rcToNum(((row-topR)+spotR),((col-topC)+spotC))][num]=(-1);
-						clearCount++;
-						if(boardHelper[rcToNum(((row-topR)+spotR),((col-topC)+spotC))][0]<=7){
-							boardHelper[rcToNum(((row-topR)+spotR),((col-topC)+spotC))][0]+=1;
-						}
+						removeUnitCell(((row-topR)+spotR),((col-topC)+spotC),num);
 					}
-				}
 				}
 			}
 	return clearCount;
@@ -247,13 +243,11 @@ function gridPrintout(){
 		}
 		if((newBoard[ax]>0)&&(newBoard[ax]<10)){
 			num=newBoard[ax];
-			col=ax%10;
-			row=(ax-(ax%10))/10;
+			col=rcToCol(ax);
+			row=rcToRow(ax);
 			//console.log("row: "+row+" col: "+col+" num: "+num);
 			markSolvedCell(row, col, num);
-			clearRow(row, col, num);
-			clearColumn(row, col, num);
-			clearBox(row, col, num);
+			
 		}
 	}
 	if(debugToken)
@@ -264,13 +258,15 @@ function gridPrintout(){
 	newOneChoice();
 	//document.getElementById("naked").innerHTML=
 	naked();
-	oneChoice();
-	//newOneChoice();
+	checkPuzzle();
+	newOneChoice();
 	document.getElementById("eight").innerHTML=findEight();
 	document.getElementById("note").innerHTML=displayNotesOld();
 	displayNotes();
 	document.getElementById("info").innerHTML=" "+boardHelper[0][0]+"/81</br>";
+	
 }
+
 function printOutDoubleArray( doubleArray){
 var print = " ";
 	for(var a=0; a < doubleArray.length; a++){
@@ -281,7 +277,13 @@ var print = " ";
 	}
 	document.getElementById("listArray").innerHTML=print;	
 	}
-function oneChoice(){
+
+///////////////////////////////////////////////
+//newOneChoice:
+//goal: to display one choice options for the X and Y axis.
+///////////////////////////////////////////////
+function newOneChoice(){	
+	var tempCol=0;
 	var print = " ";
 	for(var a=1; a < boardHelper.length; a++){
 		var bh=boardHelper[a];
@@ -290,37 +292,36 @@ function oneChoice(){
 					if(boardHelper[a][index]===0)
 					{
 					print += "["+a+"] is a "+index+"<br>";
-					document.getElementById("b"+a+"").value=index;
+					markSolvedCell(rcToRow(a),rcToCol(a),index);
 					}
 				}
 			}
 	}
 	document.getElementById("one").innerHTML=print;
-}
-///////////////////////////////////////////////
-//newOneChoice:
-//goal: to display one choice options for the X and Y axis.
-///////////////////////////////////////////////
-function newOneChoice(){	
-	var tempCol=0;
 	 /////////
 	 //row   /
 	 /////////
 	 for(var colCount=1; colCount<10; colCount++){
 		for( var row=1; row<10; row++){
 		tempCol=0;		 
-				for(var cCount=1; cCount<10; cCount++){
+				for(var cCount=1; cCount<=10; cCount++){
+					if(cCount===10)
+					{
+							colHelper[row][colCount]=(-1);
+					}else{
 						////console.log("*["+boardHelper[rcToNum(row,cCount)][colCount]+"] row:"+row+" cCount"+cCount+" colCount:"+colCount+" tempCol:"+tempCol);
 						if(tempCol===9)
 						{
-							break;
+						//	break;
 						}
 						if(boardHelper[rcToNum(row,cCount)][colCount]===1)
 						{
-							tempCol=9;							
+							tempCol=9;
+							break;							
 						}else if(boardHelper[rcToNum(row,cCount)][colCount]===(-1)){
 							tempCol+=1;
 						}
+					}
 					}
 					colHelper[row][colCount]=tempCol;
 				}
@@ -597,7 +598,6 @@ function findOneChoiceRow(row, candidate){
 		{
 			sendBack="["+rcToNum(row,col)+"] is a "+candidate;
 			markSolvedCell(row,col,candidate);
-			document.getElementById("b"+rcToNum(row,col)+"").value=candidate;
 			break;
 		}
 	}
@@ -611,7 +611,6 @@ function findOneChoiceCol(col, candidate){
 		{
 			sendBack="["+rcToNum(row,col)+"] is a "+candidate;
 			markSolvedCell(row,col,candidate);
-			document.getElementById("b"+rcToNum(row,col)+"").value=candidate;
 			break;
 		}
 	}
@@ -668,7 +667,6 @@ function findOneChoiceBox(box, candidate){
 					if(boardHelper[rcToNum((topR+spotR),(topC+spotC))][candidate]===0){
 						sendBack="["+rcToNum((topR+spotR),(topC+spotC))+"] is a "+candidate;
 						markSolvedCell((topR+spotR),(topC+spotC),candidate);
-						document.getElementById("b"+rcToNum((topR+spotR),(topC+spotC))+"").value=candidate;
 						return sendBack;
 					}
 				}
@@ -791,7 +789,7 @@ function clearRowNaked(row, candidate, n1c, n2c, n3c){
 	}
 }
 function clearColNaked(col, candidate, n1r, n2r, n3r){
-	console.log("row: "+row+" candidate: "+candidate+" n1c: "+n1c+" n2c: "+n2c+" n3c: "+n3c);
+	console.log("row: "+row+" candidate: "+candidate+" n1r: "+n1r+" n2r: "+n2r+" n3r: "+n3r);
 	for(var row=1; row<10; row++){
 		if((row!==n1r)&&(row!==n2r)&&(row!==n3r)){
 			removeUnitCell(row, col, candidate);
@@ -893,4 +891,55 @@ function tablePrint(){
 				HelperPrint+="</tr>";
 			}
 			document.getElementById("boardeHelper").innerHTML=HelperPrint;
+}
+
+function checkPuzzle(){
+	var grand=0;
+	var tempCol=0;
+	for(var colCount2=1; colCount2<10; colCount2++){
+		for( var row2=1; row2<10; row2++){
+		tempCol=0;		 
+				for(var cCount2=1; cCount2<10; cCount2++){
+					
+						if(boardHelper[rcToNum(row2,cCount2)][colCount2]===1)
+						{
+							tempCol+=1;					
+						}else if(boardHelper[rcToNum(row2,cCount2)][colCount2]===(-1)){
+							
+						}
+					
+					}
+					//colHelper[row2][colCount2]=tempCol;
+					if(tempCol>=2){
+						document.getElementById("message").innerHTML="Error";
+					}else{
+						if(tempCol===1){
+							grand++;
+						}
+					}					
+				}
+			
+		}
+		//document.getElementById("grand").innerHTML=" "+grand;
+		var rowXCount=0;
+		var rowACount=0;
+		for(var row=1; row<10; row++){
+			for(var col=1; col<10; col++){
+				rowXCount=0;
+				rowACount=0;
+				for(var unit=1; unit<10; unit++){
+					if(boardHelper[rcToNum(row,col)][unit]===(1)){
+						rowACount++;
+					}else if(boardHelper[rcToNum(row,col)][unit]===(-1)){
+						rowXCount++;
+					}
+				}
+			if((rowACount>1)||(rowXCount>8)){
+				document.getElementById("message").innerHTML="Error";
+			}
+			}
+		}
+		if(grand===81){
+			document.getElementById("message").innerHTML="Solved!";
+		}
 }
